@@ -1,0 +1,64 @@
+.container-main-2 {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.container-sub {
+  width: 400px;
+  margin: auto;
+  padding: 40px;
+  border: 0.1px solid #c7c7c7;
+  margin-top: 100px;
+  border-radius: 5px;
+}
+
+.container-main-50:first-child {
+  border-right: 0.1px solid #c7c7c7;
+}
+
+.container-main-50 {
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.container-sub h2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.hr-tag {
+  border-top: 0.1px solid #c7c7c7;
+  border-left: unset;
+  border-bottom: unset;
+  border-right: unset;
+}
+.mr-24 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+input:focus-visible {
+  outline: unset;
+}
+.submit-btn {
+  display: block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  margin: auto;
+  width: 100%;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.form-control-submit {
+  margin-top: 40px;
+}

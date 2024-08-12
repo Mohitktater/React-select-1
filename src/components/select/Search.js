@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./search.css";
 
-export const SearchableSelect = ({ options, onSelectFromList }) => {
-  const [filteredOptions, setFilteredOptions] = useState([options]);
+export const SearchableSelect = ({ options, onSelect }) => {
+  const [filteredOptions, setFilteredOptions] = useState(options);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isListVisiable, setIsListVisiable] = useState(false);
 
@@ -21,18 +21,14 @@ export const SearchableSelect = ({ options, onSelectFromList }) => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    onSelectFromList(option.value);
+    onSelect(option.value);
     setFilteredOptions([]);
     handleShowList();
   };
 
   const handleShowList = () => {
-    setIsListVisiable((prevState) => (prevState === true ? false : true));
+    setIsListVisiable((prevState) => !prevState);
   };
-
-  useEffect(() => {
-    setFilteredOptions(options);
-  }, [options]);
 
   return (
     <div>
@@ -48,8 +44,8 @@ export const SearchableSelect = ({ options, onSelectFromList }) => {
             onChange={handleInputChange}
           />
           <ul>
-            {filteredOptions.map((option, index) => (
-              <li key={index} onClick={() => handleOptionClick(option)}>
+            {filteredOptions.map((option) => (
+              <li key={option.value} onClick={() => handleOptionClick(option)}>
                 {option.label}
               </li>
             ))}

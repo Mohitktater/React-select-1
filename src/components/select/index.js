@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { SearchableSelect } from "./Search.js";
 
 export default function Main() {
@@ -13,7 +13,7 @@ export default function Main() {
     { label: "Web3", value: "8" },
     { label: "UI UX & Graphics Design", value: "9" },
   ];
-  const [selectedOption, setSelectedOption] = useState([]);
+  const [selectedOption, setSelectedOption] = useState();
   const [dataSaved, setDataSaved] = useState("");
 
   const handleSelectChange = (Option) => {
@@ -22,10 +22,6 @@ export default function Main() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    var dataSubmited = { selection_value: selectedOption };
-    console.log(dataSubmited);
-    //api to submit code will be here
-    //on success response showing the data
     setDataSaved(selectedOption);
   };
 
@@ -35,13 +31,13 @@ export default function Main() {
         <div className="container-main-50">
           <div className="container-sub">
             <form onSubmit={handleSubmit}>
-              <h2>Custom React Select</h2>
+              <h2>Custom React Select </h2>
               <hr className="hr-tag mr-24" />
               <SearchableSelect
                 options={options}
-                onSelectFromList={handleSelectChange}
+                onSelect={handleSelectChange}
               />
-              <div class="form-control-submit">
+              <div className="form-control-submit">
                 <button className="submit-btn btn btn-primary" type="submit">
                   Submit
                 </button>
