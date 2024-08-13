@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+
 import "./search.css";
 
 export const SearchableSelect = ({ options, onSelect }) => {
   const [filteredOptions, setFilteredOptions] = useState(options);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isListVisiable, setIsListVisiable] = useState(false);
+  const wrapperRef = useRef(null);
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -21,7 +23,7 @@ export const SearchableSelect = ({ options, onSelect }) => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    onSelect(option.value);
+    onSelect(option);
     setFilteredOptions([]);
     handleShowList();
   };
@@ -29,10 +31,23 @@ export const SearchableSelect = ({ options, onSelect }) => {
   const handleShowList = () => {
     setIsListVisiable((prevState) => !prevState);
   };
+  useEffect(() => {
+    // Function to check if clicked outside of component
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsListVisiable(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
 
   return (
     <div>
-      <div className="search-component">
+      <div ref={wrapperRef} className="search-component">
         <div className="selected-value">
           {selectedOption ? selectedOption.label : "--select--"}
           <div className="right-div" onClick={() => handleShowList()}></div>
