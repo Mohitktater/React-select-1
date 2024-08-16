@@ -25,10 +25,10 @@ export const SearchableSelect = ({ options, onSelect }) => {
     setSelectedOption(option);
     onSelect(option);
     setFilteredOptions([]);
-    handleShowList();
+    toggleSuggestionList();
   };
 
-  const handleShowList = () => {
+  const toggleSuggestionList = () => {
     setIsListVisiable((prevState) => !prevState);
   };
   useEffect(() => {
@@ -50,7 +50,10 @@ export const SearchableSelect = ({ options, onSelect }) => {
       <div ref={wrapperRef} className="search-component">
         <div className="selected-value">
           {selectedOption ? selectedOption.label : "--select--"}
-          <div className="right-div" onClick={() => handleShowList()}></div>
+          <div
+            className="right-div"
+            onClick={() => toggleSuggestionList()}
+          ></div>
         </div>
         <div className={`search-list-ul ${isListVisiable ? "visible" : ""}`}>
           <input
