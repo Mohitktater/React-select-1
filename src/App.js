@@ -1,59 +1,67 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "./components/select/";
 
 function App() {
-  const softwareOptions = [
-    { label: "Frontend Development", value: "1" },
-    { label: "Backend Development", value: "2" },
-    { label: "CTO as a Service", value: "3" },
-    { label: "Devops Engineer", value: "4" },
-    { label: "Mobile Develpment", value: "5" },
-    { label: "Software testing", value: "6" },
-    { label: "Digital Marketing", value: "7" },
-    { label: "Web3", value: "8" },
-    { label: "UI UX & Graphics Design", value: "9" },
-  ];
-  const carOptions = [
-    { label: "Maruti Suzuki Swift", value: "1" },
-    { label: "Hyundai i20", value: "2" },
-    { label: "Tata Nexon", value: "3" },
-    { label: "Mahindra Thar", value: "4" },
-    { label: "Toyota Fortuner", value: "5" },
-    { label: "Honda City", value: "6" },
-    { label: "Kia Seltos", value: "7" },
-    { label: "Renault Kiger", value: "8" },
-    { label: "MG Hector", value: "9" },
-  ];
-  const TeamOptions = [
-    { label: "Aarav Kumar", value: "1" },
-    { label: "Priya Singh", value: "2" },
-    { label: "Rohan Gupta", value: "3" },
-    { label: "Anjali Rao", value: "4" },
-    { label: "Suresh Patil", value: "5" },
-    { label: "Deepika Iyer", value: "6" },
-    { label: "Nikhil Joshi", value: "7" },
-    { label: "Sonia Shah", value: "8" },
-    { label: "Rajesh Koothrappali", value: "9" },
-  ];
+  const [softwareOptions, setSoftwareOptions] = useState([]);
+  const [carOptions, setCarOptions] = useState([]);
+  const [teamOptions, setTeamOptions] = useState([]);
 
   const [selectedOptionSoftware, setSelectedOptionSoftware] = useState();
   const [selectedOptionCar, setSelectedOptionCar] = useState();
   const [selectedOptionTeam, setSelectedOptionTeam] = useState();
 
-  const handleSelectChangeSoftware = (Option) => {
-    setSelectedOptionSoftware(Option);
+  const [loadingSoftware, setisLoadingSoftware] = useState(false);
+  const [loadingCar, setisLoadingCar] = useState(false);
+  const [loadingTeam, setisLoadingTeam] = useState(false);
+
+  const handleSelectChangeSoftware = (option) => {
+    setSelectedOptionSoftware(option);
   };
 
-  const handleSelectChangeCar = (Option) => {
-    setSelectedOptionCar(Option);
+  const handleSelectChangeCar = (option) => {
+    setSelectedOptionCar(option);
   };
-  const handleSelectChangeTeam = (Option) => {
-    setSelectedOptionTeam(Option);
+  const handleSelectChangeTeam = (option) => {
+    setSelectedOptionTeam(option);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setisLoadingSoftware(true);
+        const softwareResponse = await fetch(
+          "https://dummyjson.com/c/7a5e-b92f-4e26-afc0"
+        );
+        const softwareData = await softwareResponse.json();
+        setSoftwareOptions(softwareData);
+        setisLoadingSoftware(false);
+
+        setisLoadingCar(true);
+        const carResponse = await fetch(
+          "https://dummyjson.com/c/2d95-d545-415d-a92e"
+        );
+        const carData = await carResponse.json();
+        setCarOptions(carData);
+        setisLoadingCar(false);
+
+        setisLoadingTeam(true);
+        const teamResponse = await fetch(
+          "https://dummyjson.com/c/8f6a-85c4-4d99-ae02"
+        );
+        const teamData = await teamResponse.json();
+        setTeamOptions(teamData);
+        setisLoadingTeam(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submit action
+    event.preventDefault();
     if (selectedOptionSoftware) {
       alert(
         `Selected option value for sofware : ${selectedOptionSoftware.label}`
@@ -88,16 +96,22 @@ function App() {
                   <Select
                     options={softwareOptions}
                     onSelect={handleSelectChangeSoftware}
+                    isLoading={loadingSoftware}
                   />
                   <div className="mr-b-20"></div>
                   <Select
                     options={carOptions}
                     onSelect={handleSelectChangeCar}
+                    isLoading={loadingCar}
+                    disabled={true}
+                    value={4}
                   />
                   <div className="mr-b-20"></div>
                   <Select
-                    options={TeamOptions}
+                    options={teamOptions}
                     onSelect={handleSelectChangeTeam}
+                    isLoading={loadingTeam}
+                    search={true}
                   />
                   <div className="mr-b-20"></div>
                   <button className="submit-btn btn btn-primary" type="submit">

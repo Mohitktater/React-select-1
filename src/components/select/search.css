@@ -36,10 +36,14 @@
 }
 
 .search-list-ul {
-  border: 0.1px solid #c7c7c7;
+  border: 0px solid #c7c7c7;
   border-radius: 6px;
-  position: relative;
+  position: absolute;
   display: none;
+  width: 100%;
+  top: 0;
+
+  height: 100%;
 }
 
 .search-list-ul ul {
@@ -49,7 +53,7 @@
   border: 0.1px solid #c7c7c7;
   box-shadow: 0px 1px 4px 0px #eee;
   position: absolute;
-  top: 16px;
+  top: 0px;
   z-index: 1;
   background: #fff;
   width: 100%;
@@ -57,7 +61,7 @@
   overflow-y: auto;
   max-height: 288px;
   margin-top: 44px;
-  width: calc(100% - 28px);
+  width: calc(100% - 0px);
   left: 50%;
   transform: translate(-50%, 0px);
   user-select: none;
@@ -87,11 +91,11 @@
 }
 
 .search-list-ul input {
-  width: calc(100% - 54px);
+  width: calc(100%);
   display: flex;
-  margin: 14px auto;
+  margin: 0px auto;
   display: block;
-  height: 34px;
+  height: 47px;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
@@ -100,9 +104,44 @@
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 .search-list-ul input:focus {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
     0 0 8px rgba(102, 175, 233, 0.6);
   border: 1px solid rgba(102, 175, 233, 0.6);
+}
+.select-loader {
+  border: 3px solid #007bff;
+  border-radius: 50%;
+  border-top: 3px solid #fff;
+  width: 20px;
+  height: 20px;
+  animation: select-spin 1s linear infinite;
+  position: absolute;
+  top: 10px;
+  right: 7px;
+  transform: translate(0%, -50%);
+  background: #eee;
+}
+.select-disabled {
+  background: #eee;
+}
+
+@-webkit-keyframes select-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes select-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
