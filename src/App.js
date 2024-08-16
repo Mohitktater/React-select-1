@@ -41,15 +41,15 @@ function App() {
   const [selectedOptionCar, setSelectedOptionCar] = useState();
   const [selectedOptionTeam, setSelectedOptionTeam] = useState();
 
-  const handleSelectChangeSoftware = (Option) => {
-    setSelectedOptionSoftware(Option);
+  const handleSelectChangeSoftware = (option) => {
+    setSelectedOptionSoftware(option);
   };
 
-  const handleSelectChangeCar = (Option) => {
-    setSelectedOptionCar(Option);
+  const handleSelectChangeCar = (option) => {
+    setSelectedOptionCar(option);
   };
-  const handleSelectChangeTeam = (Option) => {
-    setSelectedOptionTeam(Option);
+  const handleSelectChangeTeam = (option) => {
+    setSelectedOptionTeam(option);
   };
 
   const handleSubmit = (event) => {
